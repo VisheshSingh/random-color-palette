@@ -23,8 +23,19 @@ function generateColors() {
 
     refreshBtn.style.backgroundColor = randomHex;
 
+    colorEl.addEventListener('click', () => copyColor(randomHex, colorEl));
   }
 }
+
+function copyColor(hex, element) {
+  navigator.clipboard.writeText(hex).then(() => {
+    element.querySelector('.hex-value').innerHTML = 'Copied!';
+    setTimeout(() => {
+      element.querySelector('.hex-value').innerHTML = hex;
+    }, 1000);
+  });
+}
+
 // event listeners
 refreshBtn.addEventListener('click', generateColors);
 
